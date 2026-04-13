@@ -1,0 +1,20 @@
+# Sensitive data
+bot.db
+auth_baileys_*/
+temp_email.txt
+
+# Dependencies
+node_modules/
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+nohup.out
+
+# OS files
+desktop.ini
+.DS_Store
+Thumbs.db

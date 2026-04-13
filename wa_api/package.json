@@ -1,0 +1,13 @@
+{
+  "name": "wa_api_stable",
+  "version": "1.2.0",
+  "description": "WhatsApp SaaS Multi-Session using Stable Baileys",
+  "main": "server.js",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "express": "^4.22.1",
+    "pino": "^9.4.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js"
+  }
+}
