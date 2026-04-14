@@ -452,6 +452,7 @@ reply_markup=back_menu(), parse_mode="HTML"
         keyboard=[
             [InlineKeyboardButton("💎 1 HARI - VIP",callback_data="buy1")],
             [InlineKeyboardButton("💎 3 HARI - PRO",callback_data="buy3")],
+            [InlineKeyboardButton("💎 30 HARI - ULTRA",callback_data="buy30")],
             [InlineKeyboardButton("🔙 KEMBALI",callback_data="back")]
         ]
 
@@ -490,6 +491,22 @@ reply_markup=back_menu(), parse_mode="HTML"
 
         await query.edit_message_text(
 """<pre>💳 PEMBAYARAN: PAKET 3 HARI
+━━━━━━━━━━━━━━━━━━━━━
+Silakan transfer donasi ke rekening berikut:
+💸 DANA: 083849695434
+
+Kirim bukti transfer ke Admin @username_admin.</pre>""",
+reply_markup=back_menu(), parse_mode="HTML"
+)
+
+    elif data=="buy30":
+
+        uid=query.from_user.id
+        cursor.execute("INSERT INTO orders(user_id,paket,status) VALUES(?,?,?)",(uid,"30hari","pending"))
+        conn.commit()
+
+        await query.edit_message_text(
+"""<pre>💳 PEMBAYARAN: PAKET 30 HARI
 ━━━━━━━━━━━━━━━━━━━━━
 Silakan transfer donasi ke rekening berikut:
 💸 DANA: 083849695434
