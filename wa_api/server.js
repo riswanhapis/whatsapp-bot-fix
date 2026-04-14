@@ -15,7 +15,9 @@ async function startSession(uid, phoneNumber) {
     }
 
     console.log(`[API] Memulai Sesi Baileys Stable (UID: ${uid})`);
-    const { state, saveCreds } = await useMultiFileAuthState(`auth_baileys_${uid}`);
+    const DATA_DIR = process.env.DATA_DIR || '.';
+    const sessionDir = `${DATA_DIR}/auth_baileys_${uid}`;
+    const { state, saveCreds } = await useMultiFileAuthState(sessionDir);
     const { version } = await fetchLatestBaileysVersion();
     
     const sock = makeWASocket({
@@ -49,7 +51,10 @@ async function startSession(uid, phoneNumber) {
             } else {
                 console.log(`[❌] User ${uid} Logout. Menghapus data sesi...`);
                 sessions.delete(uid);
-                try { fs.rmSync(`auth_baileys_${uid}`, { recursive: true, force: true }); } catch (e) {}
+                try { 
+                    const sessionDir = `${DATA_DIR}/auth_baileys_${uid}`;
+                    fs.rmSync(sessionDir, { recursive: true, force: true }); 
+                } catch (e) {}
             }
         } else if (connection === 'open') {
             console.log(`✅ [AKTIF] UID ${uid} Terhubung ke WhatsApp!`);

@@ -50,7 +50,12 @@ user_cooldowns = {}
 # DATABASE
 # ======================
 
-conn = sqlite3.connect("bot.db",check_same_thread=False)
+import os
+DATA_DIR = os.getenv("DATA_DIR", ".")
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+conn = sqlite3.connect(os.path.join(DATA_DIR, "bot.db"),check_same_thread=False)
 cursor = conn.cursor()
 
 cursor.execute("""
